@@ -1,7 +1,7 @@
 import os
 import csv
 import nltk
-from Corpus import Corpus
+from LDA import LDA
 from ResearchPaper import ResearchPaper
 
 
@@ -13,7 +13,7 @@ def main():
     # Delete below
     rowCount = 0
 
-    preprocess = True
+    preprocess = False
     if preprocess:
         os.remove(preprocessedCSVFile)
         print('Preprocessing data...')
@@ -28,16 +28,27 @@ def main():
 
                 # Delete below
                 rowCount += 1
-                if rowCount == 50:
+                if rowCount == 10:
                     break
     else:
         print("Skipping data preprocessing...")
 
-    corpus = Corpus(preprocessedCSVFile)
-    # corpus.runLDA(num_topics=15, random_state=100, update_every=1, chunksize=2000, passes=10, alpha="auto")
-    corpus.runTLDA(num_topics=10, random_state=100, chunksize=9, passes=5, alphas=0.01, time_slice=[5, 4])
+    lda = LDA(preprocessedCSVFile)
+
+    # lda.LDA(num_topics=15, random_state=100, update_every=1, chunksize=2000, passes=10, alpha="auto")
+    lda.TLDA(num_topics=10, random_state=100, chunksize=9, passes=5, alphas=0.01, time_slice=[5, 4])
+
+    # lda.printTLDATopicEvolution(topic=1)
+    # lda.printTLDATopics(timeSlice=1)
+    # TODO: Visualize Results
+    # BROKEN
+    lda.visualizeTLDAResults(time=0)
+    # TODO: Coherence results
+
+    # Potential TODOs: https://markroxor.github.io/gensim/static/notebooks/ldaseqmodel.html
+    # TODO: Topic distances between documents
+    # TODO: how fast/slow these topics evolve. Chain Variance
 
 
 if __name__ == '__main__':
     main()
-
