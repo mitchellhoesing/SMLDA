@@ -39,13 +39,15 @@ def main():
     lda.TLDA(num_topics=10, random_state=100, chunksize=9, passes=5, alphas=0.01, time_slice=[5, 4])
 
     # lda.printTLDATopicEvolution(topic=1)
-    # lda.printTLDATopics(timeSlice=1)
-    # TODO: Visualize Results
-    # BROKEN
-    lda.visualizeTLDAResults(time=0)
-    # TODO: Coherence results
+    lda.printTLDATopics(timeSlice=0)
+    # TODO: save model
+    # TODO: save results for various number of topics for human analysis
+    # TODO: Generate coherence results
 
     # Potential TODOs: https://markroxor.github.io/gensim/static/notebooks/ldaseqmodel.html
+    # TODO: Visualize Results
+    # BROKEN
+    # lda.visualizeTLDAResults(time=0)
     # TODO: Topic distances between documents
     # TODO: how fast/slow these topics evolve. Chain Variance
 
